@@ -23,7 +23,6 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.media3.common.MediaItem
-import androidx.media3.common.util.Util
 import androidx.media3.exoplayer.ExoPlayer
 import com.example.exoplayer.databinding.ActivityPlayerBinding
 
@@ -51,7 +50,8 @@ class PlayerActivity : AppCompatActivity() {
             .also { exoPlayer ->
                 viewBinding.videoView.player = exoPlayer
                 val mediaItem = MediaItem.fromUri(getString(R.string.media_url_mp4))
-                exoPlayer.setMediaItems(listOf(mediaItem), mediaItemIndex, playbackPosition)
+                val secondMediaItem = MediaItem.fromUri(getString(R.string.media_url_mp3))
+                exoPlayer.setMediaItems(listOf(mediaItem, secondMediaItem), mediaItemIndex, playbackPosition)
                 exoPlayer.playWhenReady
                 exoPlayer.prepare()
             }
