@@ -48,6 +48,10 @@ class PlayerActivity : AppCompatActivity() {
         player = ExoPlayer.Builder(this)
             .build()
             .also { exoPlayer ->
+                exoPlayer.trackSelectionParameters = exoPlayer.trackSelectionParameters
+                    .buildUpon()
+                    .setMaxVideoSizeSd()
+                    .build()
                 viewBinding.videoView.player = exoPlayer
                 val mediaItem = MediaItem.fromUri(getString(R.string.media_url_mp4))
                 val secondMediaItem = MediaItem.fromUri(getString(R.string.media_url_mp3))
