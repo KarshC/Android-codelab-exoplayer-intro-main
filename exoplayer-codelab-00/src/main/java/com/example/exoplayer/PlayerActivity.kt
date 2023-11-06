@@ -23,6 +23,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.media3.common.MediaItem
+import androidx.media3.common.MimeTypes
 import androidx.media3.exoplayer.ExoPlayer
 import com.example.exoplayer.databinding.ActivityPlayerBinding
 
@@ -53,9 +54,11 @@ class PlayerActivity : AppCompatActivity() {
                     .setMaxVideoSizeSd()
                     .build()
                 viewBinding.videoView.player = exoPlayer
-                val mediaItem = MediaItem.fromUri(getString(R.string.media_url_mp4))
-                val secondMediaItem = MediaItem.fromUri(getString(R.string.media_url_mp3))
-                exoPlayer.setMediaItems(listOf(mediaItem, secondMediaItem), mediaItemIndex, playbackPosition)
+                val mediaItem = MediaItem.Builder()
+                    .setUri(getString(R.string.media_url_dash))
+                    .setMimeType(MimeTypes.APPLICATION_MPD)
+                    .build()
+                exoPlayer.setMediaItems(listOf(mediaItem), mediaItemIndex, playbackPosition)
                 exoPlayer.playWhenReady
                 exoPlayer.prepare()
             }
